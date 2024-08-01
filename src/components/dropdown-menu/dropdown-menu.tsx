@@ -5,7 +5,7 @@ import MenuItem from "./menu-item";
 
 export default function DropdownMenu() {
   const [isOpen, setIsOpen] = useState(false);
-  const [shouldHide, setShouldHide] = useState(false);
+  const [shouldHide, setShouldHide] = useState(true);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const toggleDropdown = () => {
@@ -27,6 +27,8 @@ export default function DropdownMenu() {
         setShouldHide(true);
       }, 75);
       return () => clearTimeout(delay);
+    } else {
+      setShouldHide(false);
     }
 
     const listener = (e: any) => {
@@ -68,7 +70,7 @@ export default function DropdownMenu() {
             : "transition ease-in duration-75 transform opacity-0 scale-95"
         } absolute right-0 z-10 bg-white origin-top-right mt-2 w-56 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}
       >
-        <div className={`${shouldHide ? "block" : "hidden"} py-1`}>
+        <div className={`${shouldHide ? "hidden" : "block"} py-1`}>
           <MenuItem href="#">Account settings</MenuItem>
           <MenuItem href="#">Support</MenuItem>
           <MenuItem href="#">License</MenuItem>
